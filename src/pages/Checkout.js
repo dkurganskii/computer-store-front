@@ -208,7 +208,7 @@ const Checkout = ({ history }) => {
                             </Button>
                         ) : (
                                 <Button
-                                    className='text-center btn btn-primary btn-raised'
+                                    className='text-center btn btn-success btn-raised'
                                     disabled={!addressSaved || !products.length}
                                     onClick={() => history.push('/payment')}
                                 >
@@ -221,7 +221,7 @@ const Checkout = ({ history }) => {
                         <Button
                             disabled={!products.length}
                             onClick={emptyCart}
-                            className='text-center btn btn-primary btn-raised'
+                            className='text-center btn btn-danger btn-raised'
                         >
                             Empty Cart
             </Button>
