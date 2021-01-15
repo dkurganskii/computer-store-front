@@ -66,16 +66,16 @@ const History = () => {
     const showDownloadLink = (order) => (
         <PDFDownloadLink
             document={<Invoice order={order} />}
-            fileName="invoice.pdf"
+             fileName= {`invoice ${new Date().toLocaleString()}`}
             className="text-center btn btn-primary btn-raised"
         >
             Download PDF
         </PDFDownloadLink>
     );
 
-    const showEachOrders = () =>
+    const showEachOrder = () =>
         orders.reverse().map((order, i) => (
-            <div key={i} className="p-3 card">
+            <div key={i} className="m-5 p-3 card">
                 <ShowPaymentInfo order={order} />
                 {showOrderInTable(order)}
                 <div className="row">
@@ -90,13 +90,13 @@ const History = () => {
                 <div className="col-md-2">
                     <UserNav />
                 </div>
-                <div className="col-md-8">
+                <div className="col text-center col-md-9">
                     <h4>
                         My Orders
                     </h4>
                     <br/>
                     {!orders.length && <p>No Orders. <Link to="/shop">Continue Shopping</Link></p>}
-                    {showEachOrders()}
+                    {showEachOrder()}
                 </div>
             </div>
         </div>
