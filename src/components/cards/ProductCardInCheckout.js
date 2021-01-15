@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import {
     CheckCircleOutlined,
     CloseCircleOutlined,
-    CloseOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
 
@@ -105,7 +104,7 @@ const ProductCardInCheckout = ({ p }) => {
                     </div>
                 </td>
                 <td>{p.title}</td>
-                <td>${p.price}</td>
+                <td>${(p.price).toFixed(2)}</td>
                 <td>{p.brand}</td>
                 <td>
                     <select

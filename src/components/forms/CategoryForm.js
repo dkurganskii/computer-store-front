@@ -3,7 +3,6 @@ import React from "react";
 const CategoryForm = ({ handleSubmit, name, setName }) => (
     <form onSubmit={handleSubmit}>
         <div className="form-group">
-            <label>Name</label>
             <input
                 type="text"
                 className="form-control"
@@ -11,9 +10,10 @@ const CategoryForm = ({ handleSubmit, name, setName }) => (
                 value={name}
                 autoFocus
                 required
+                placeholder='Enter Name'
             />
             <br />
-            <button className="btn btn-outline-primary">Save</button>
+            <button className="text-center btn btn-primary btn-raised">Save</button>
         </div>
     </form>
 );

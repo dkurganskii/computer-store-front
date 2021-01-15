@@ -13,12 +13,13 @@ const ProductListItems = ({ product }) => {
         sold,
     } = product;
 
+
     return (
         <ul className="list-group">
             <li className="list-group-item">
                 Price{" "}
                 <span className="label label-default label-pill pull-xs-right">
-                    $ {price}
+                ${ price ? (price).toFixed(2) : 'sdsd'}
                 </span>
             </li>
 

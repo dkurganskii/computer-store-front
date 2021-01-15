@@ -36,7 +36,7 @@ const AllProducts = () => {
             removeProduct(slug, user.token)
                 .then((res) => {
                     loadAllProducts();
-                    toast.error(`${res.data.title} is deleted`);
+                    toast.success(`${res.data.title} is deleted`);
                 })
                 .catch((err) => {
                     if (err.response.status === 400) toast.error(err.response.data);
@@ -46,13 +46,13 @@ const AllProducts = () => {
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3 pb-3">
             <div className="row">
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
 
-                <div className="col">
+                <div className="col-md-8">
                     {loading ? (
                         <h4 className="text-danger">Loading...</h4>
                     ) : (

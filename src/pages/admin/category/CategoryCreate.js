@@ -30,21 +30,26 @@ const CategoryCreate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(name);
-        setLoading(true);
-        createCategory({ name }, user.token)
-            .then((res) => {
-                // console.log(res)
-                setLoading(false);
-                setName("");
-                toast.success(`"${res.data.name}" is created`);
-                loadCategories();
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-                if (err.response.status === 400) toast.error(err.response.data);
-            });
+        if(name.trim().length < 2 || name.trim().length > 32){
+            alert('Category name must be from 2 to 32 characters long')
+        }else{
+// console.log(name);
+setLoading(true);
+createCategory({ name }, user.token)
+    .then((res) => {
+        // console.log(res)
+        setLoading(false);
+        setName("");
+        toast.success(`"${res.data.name}" is created`);
+        loadCategories();
+    })
+    .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        if (err.response.status === 400) toast.error(err.response.data);
+    });
+        }
+        
     };
 
     const handleRemove = async (slug) => {
@@ -55,7 +60,7 @@ const CategoryCreate = () => {
             removeCategory(slug, user.token)
                 .then((res) => {
                     setLoading(false);
-                    toast.error(`${res.data.name} deleted`);
+                    toast.success(`${res.data.name} deleted`);
                     loadCategories();
                 })
                 .catch((err) => {
@@ -71,18 +76,18 @@ const CategoryCreate = () => {
     const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3">
             <div className="row">
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
-                <div className="col">
+                <div className="col-md-8">
                     {loading ? (
                         <h4 className="text-danger">Loading..</h4>
                     ) : (
-                            <h4>Create category</h4>
+                            <h4>Create Category</h4>
                         )}
-
+<br/>
                     <CategoryForm
                         handleSubmit={handleSubmit}
                         name={name}

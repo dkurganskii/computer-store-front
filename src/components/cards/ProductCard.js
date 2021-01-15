@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
         // create cart array
         let cart = []
         if (typeof window !== 'undefined') {
-            // if cart is in loacl storage GET it
+            // if cart is in local storage GET it
             if (localStorage.getItem('cart')) {
                 cart = JSON.parse(localStorage.getItem('cart'))
             }
@@ -79,7 +79,7 @@ const ProductCard = ({ product }) => {
                 ]}
             >
                 <Meta
-                    title={`${title} - $${price}`}
+                    title={`${title} - $${(price).toFixed(2)}`}
                     description={`${description && description.substring(0, 30)}...`}
                 />
             </Card>

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { getUserCart, emptyUserCart, saveUserAddress, applyCoupon, createCashOrderForUser } from "../functions/user";
-import { Input, Button } from 'antd';
+import { Input, Button, Tooltip } from 'antd';
 
 
 const Checkout = ({ history }) => {
     const { TextArea } = Input;
+    const [tooltip, setTooltip] = useState('Enter Delivery Address')
 
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
@@ -50,17 +51,26 @@ const Checkout = ({ history }) => {
 
     const saveAddressToDb = () => {
         // console.log(address);
-        saveUserAddress(user.token, address).then((res) => {
-            if (res.data.ok) {
-                setAddressSaved(true);
-                toast.success("Address saved");
-            }
-        });
+        if(address.trim().length < 6){
+            alert('Enter correct address')
+        }else{
+            saveUserAddress(user.token, address).then((res) => {
+                if (res.data.ok) {
+                    setAddressSaved(true);
+                    toast.success("Address saved");
+                }
+            });
+            setTooltip('Place Order')
+        }
+        
     };
 
     const applyDiscountCoupon = () => {
         console.log('send coupon to backend', coupon)
-        applyCoupon(user.token, coupon)
+        if(coupon.trim().length < 2){
+            alert('Enter correct coupon')
+        }else{
+            applyCoupon(user.token, coupon)
             .then(res => {
                 console.log('RES ON COUPON APPLIED', res.data)
                 if (res.data) {
@@ -78,12 +88,13 @@ const Checkout = ({ history }) => {
                     })
                 }
             })
+        }
+        
     }
 
     const showAddress = () =>
     (
         <>
-            {/* <ReactQuill theme="snow" value={address} onChange={setAddress} /> */}
             <TextArea
                 type='text'
                 placeholder='Enter address'
@@ -105,7 +116,7 @@ const Checkout = ({ history }) => {
                 <div key={i}>
                     <p>
                         {p.product.title} ({p.color}) x {p.count} ={" "}
-                        {p.product.price * p.count}
+                        ${(p.product.price * p.count).toFixed(2)}
                     </p>
                 </div>
             ))}
@@ -192,13 +203,15 @@ const Checkout = ({ history }) => {
                 <hr />
                 {showProductSummary()}
                 <hr />
-                <p>Cart Total: {total}</p>
+                <p>Cart Total: ${(total).toFixed(2)}</p>
                 {totalAfterDiscount > 0 && (
                     <p className='bg-success p-2'>Discount Applied: Total Payable: ${totalAfterDiscount}</p>
                 )}
                 <div className="row">
+                <Tooltip title={tooltip}>
                     <div className="col-md-3 mt-3">
                         {COD ? (
+                              
                             <Button
                                 className='text-center btn btn-primary btn-raised'
                                 disabled={!addressSaved || !products.length}
@@ -206,7 +219,9 @@ const Checkout = ({ history }) => {
                             >
                                 Place Order
                             </Button>
+                           
                         ) : (
+                            
                                 <Button
                                     className='text-center btn btn-success btn-raised'
                                     disabled={!addressSaved || !products.length}
@@ -214,8 +229,10 @@ const Checkout = ({ history }) => {
                                 >
                                     Place Order
                                 </Button>
+                            
                             )}
                     </div>
+                    </Tooltip>
 
                     <div className="col-md-6 mt-3">
                         <Button

@@ -8,7 +8,7 @@ import { DollarOutlined, CheckOutlined } from '@ant-design/icons'
 import laptop from '../images/laptop.png'
 import { createOrder, emptyUserCart } from '../functions/user'
 
-const StrikeCheckout = ({ history }) => {
+const StripeCheckout = ({ history }) => {
     const dispatch = useDispatch()
     const { user, coupon } = useSelector((state) => ({ ...state }))
 
@@ -71,6 +71,7 @@ const StrikeCheckout = ({ history }) => {
             setProcessing(false)
             setSucceeded(true)
         }
+       
     }
 
     const handleChange = async (e) => {
@@ -100,17 +101,18 @@ const StrikeCheckout = ({ history }) => {
         <>
             {
                 !succeeded && <div>{coupon && totalAfterDiscount !== undefined ?
-                    (<p className='alert alert-success'>{`Total after discount: $${totalAfterDiscount}`}</p>) :
+                    (<p className='alert alert-success'>{`Total after discount: $${(totalAfterDiscount).toFixed(2)}`}</p>) :
                     (<p className='alert alert-danger'>No coupon applied</p>)}</div>
             }
             <div className='text-center pb-5'>
                 <Card
                     cover={<img src={laptop}
-                        style={{ height: '200px', objectFit: 'cover', marginBottom: '-50px' }} />}
+                        style={{ height: '320px', objectFit: 'cover', marginBottom: '-50px' }} />}
                     actions={[
                         <>
                             <DollarOutlined className='text-info' />
-                            <br /> Total: ${cartTotal}
+                            {/* <br /> Total: ${cartTotal} */}
+                            <br /> Total: ${(cartTotal).toFixed(2)}
                         </>,
                         <>
                             <CheckOutlined className='text-info' />
@@ -121,10 +123,9 @@ const StrikeCheckout = ({ history }) => {
             </div>
             <form
                 id='payment-form'
-                className='stripe-form'
                 onSubmit={handleSubmit}
             >
-                <CardElement
+                {!succeeded && <><CardElement
                     id='card-element'
                     options={cartStyle}
                     onChange={handleChange}
@@ -137,15 +138,16 @@ const StrikeCheckout = ({ history }) => {
                         {processing ? <div className='spinner' id='spinner'></div> : 'Pay'}
                     </span>
                 </button>
+                </>}
                 <br />
                 {error && <div className='card-error' role='alert'>{error}</div>}
                 <br />
-                <p className={succeeded ? 'result-message' : 'result-message hidden'}>
-                    Payment Successful <Link to='/user/history'>See it in your purchase history</Link></p>
+                <p className={succeeded ? 'result-message bg-success p-3' : 'result-message hidden'}>
+                    Payment Successful! <Link to='/user/history'>See it in your purchase history</Link></p>
             </form>
         </>
     )
 
 }
 
-export default StrikeCheckout
+export default StripeCheckout

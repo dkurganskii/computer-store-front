@@ -186,7 +186,7 @@ const Shop = () => {
         </div>
     );
 
-    // 6. show products by sub category
+    // 6. show products by subcategory
     const showSubs = () =>
         subs.map((s) => (
             <div
@@ -369,7 +369,7 @@ const Shop = () => {
                             <div style={{ maringTop: "-10px" }}>{showStars()}</div>
                         </SubMenu>
 
-                        {/* sub category */}
+                        {/* subcategory */}
                         <SubMenu
                             key="4"
                             title={

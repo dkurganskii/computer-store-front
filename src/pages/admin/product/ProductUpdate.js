@@ -110,34 +110,35 @@ const ProductUpdate = ({ match, history }) => {
         if (values.category._id === e.target.value) {
             loadProduct();
         }
-        // clear old sub category ids
+        // clear old subcategory ids
         setArrayOfSubs([]);
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3">
             <div className="row">
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
 
-                <div className="col-md-10">
+                <div className="col-md-8">
                     {loading ? (
                         <LoadingOutlined className="text-danger h1" />
                     ) : (
-                            <h4>Product update</h4>
+                            <h4>Product Update</h4>
                         )}
 
                     {/* {JSON.stringify(values)} */}
 
                     <div className="p-3">
+                        <br/>
                         <FileUpload
                             values={values}
                             setValues={setValues}
                             setLoading={setLoading}
                         />
                     </div>
-
+              <br/>
                     <ProductUpdateForm
                         handleSubmit={handleSubmit}
                         handleChange={handleChange}
@@ -149,8 +150,7 @@ const ProductUpdate = ({ match, history }) => {
                         arrayOfSubs={arrayOfSubs}
                         setArrayOfSubs={setArrayOfSubs}
                         selectedCategory={selectedCategory}
-                    />
-                    <hr />
+                    /> 
                 </div>
             </div>
         </div>

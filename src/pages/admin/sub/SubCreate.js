@@ -33,8 +33,10 @@ const SubCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(name);
-        setLoading(true);
-        createSub({ name, parent: category }, user.token)
+        if(name.trim().length < 2 || name.trim().length > 32){
+            alert('Subcategory name must be from 2 to 32 characters long')
+        }else{
+            createSub({ name, parent: category }, user.token)
             .then((res) => {
                 // console.log(res)
                 setLoading(false);
@@ -47,6 +49,8 @@ const SubCreate = () => {
                 setLoading(false);
                 if (err.response.status === 400) toast.error(err.response.data);
             });
+        }
+      
     };
 
     const handleRemove = async (slug) => {
@@ -57,7 +61,7 @@ const SubCreate = () => {
             removeSub(slug, user.token)
                 .then((res) => {
                     setLoading(false);
-                    toast.error(`${res.data.name} deleted`);
+                    toast.success(`${res.data.name} deleted`);
                     loadSubs();
                 })
                 .catch((err) => {
@@ -73,26 +77,25 @@ const SubCreate = () => {
     const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3 pb-3">
             <div className="row">
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
-                <div className="col">
+                <div className="col-md-8">
                     {loading ? (
                         <h4 className="text-danger">Loading..</h4>
                     ) : (
-                            <h4>Create sub category</h4>
+                            <h4>Create Subcategory</h4>
                         )}
 
-                    <div className="form-group">
-                        <label>Parent category</label>
+                    <div className="form-group pt-4 pb-4">
                         <select
                             name="category"
                             className="form-control"
                             onChange={(e) => setCategory(e.target.value)}
                         >
-                            <option>Please select</option>
+                            <option>Select Parent Category</option>
                             {categories.length > 0 &&
                                 categories.map((c) => (
                                     <option key={c._id} value={c._id}>

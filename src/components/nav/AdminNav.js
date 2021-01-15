@@ -1,52 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 const AdminNav = () => (
     <nav>
         <ul className="nav flex-column">
             <li className="nav-item">
-                <Link to="/admin/dashboard" className="nav-link">
-                    Dashboard
-        </Link>
+        <NavLink to="/admin/dashboard" className='nav-link' activeClassName="active">
+                  Dashboard
+             </NavLink>
             </li>
 
             <li className="nav-item">
-                <Link to="/admin/product" className="nav-link">
-                    Product
-        </Link>
+        <NavLink to="/admin/product" className='nav-link' activeClassName="active">
+                Product
+             </NavLink>
             </li>
 
             <li className="nav-item">
-                <Link to="/admin/products" className="nav-link">
-                    Products
-        </Link>
+        <NavLink to="/admin/products" className='nav-link' activeClassName="active">
+                  Products
+             </NavLink>
             </li>
 
             <li className="nav-item">
-                <Link to="/admin/category" className="nav-link">
-                    Category
-        </Link>
+         <NavLink to="/admin/category" className='nav-link' activeClassName="active">
+               Category
+             </NavLink>
             </li>
 
             <li className="nav-item">
-                <Link to="/admin/sub" className="nav-link">
-                    Sub Category
-        </Link>
+        <NavLink to="/admin/sub" className='nav-link' activeClassName="active">
+        Subcategory
+             </NavLink>
             </li>
 
             <li className="nav-item">
-                <Link to="/admin/coupon" className="nav-link">
-                    Coupon
-        </Link>
+        <NavLink to="/admin/coupon" className='nav-link' activeClassName="active">
+        Coupon
+             </NavLink>
             </li>
 
             <li className="nav-item">
-                <Link to="/user/password" className="nav-link">
+                {/* <Link to="/user/password" className="nav-link">
                     Password
-        </Link>
+        </Link> */}
+         <NavLink to="/user/password" className='nav-link' activeClassName="active">
+         Password
+             </NavLink>
             </li>
         </ul>
     </nav>
 );
 
 export default AdminNav;
+
+

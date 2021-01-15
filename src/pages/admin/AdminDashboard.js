@@ -27,14 +27,15 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3">
             <div className="row">
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
 
-                <div className="col-md-10">
+                <div className="col-md-8">
                     <h4>Admin Dashboard</h4>
+                    <br/>
                     {/* {JSON.stringify(orders)} */}
                     <Orders orders={orders} handleStatusChange={handleStatusChange} />
                 </div>

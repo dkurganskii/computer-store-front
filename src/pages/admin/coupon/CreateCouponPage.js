@@ -30,8 +30,11 @@ const CreateCouponPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        // console.table(name, expiry, discount);
-        createCoupon({ name, expiry, discount }, user.token)
+        if(name.trim().length < 6 || name.trim().length > 32){
+            alert('Coupon name must be from 6 to 32 characters long')
+            setLoading(false);
+        }else{
+            createCoupon({ name, expiry, discount }, user.token)
             .then((res) => {
                 setLoading(false);
                 loadAllCoupons(); // load all coupons
@@ -41,6 +44,9 @@ const CreateCouponPage = () => {
                 toast.success(`"${res.data.name}" is created`);
             })
             .catch((err) => console.log("create coupon err", err));
+        }
+
+       
     };
 
     const handleRemove = (couponId) => {
@@ -50,19 +56,19 @@ const CreateCouponPage = () => {
                 .then((res) => {
                     loadAllCoupons(); // load all coupons
                     setLoading(false);
-                    toast.error(`Coupon "${res.data.name}" deleted`);
+                    toast.success(`Coupon "${res.data.name}" deleted`);
                 })
                 .catch((err) => console.log(err));
         }
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3">
             <div className="row">
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-8">
                     {loading ? (
                         <h4 className="text-danger">Loading...</h4>
                     ) : (
@@ -70,8 +76,7 @@ const CreateCouponPage = () => {
                         )}
 
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label className="text-muted">Name</label>
+                        <div className="form-group pt-4 pb-4">
                             <input
                                 type="text"
                                 className="form-control"
@@ -79,22 +84,22 @@ const CreateCouponPage = () => {
                                 value={name}
                                 autoFocus
                                 required
+                                placeholder='Enter Name'
                             />
                         </div>
 
                         <div className="form-group">
-                            <label className="text-muted">Discount %</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 onChange={(e) => setDiscount(e.target.value)}
                                 value={discount}
                                 required
+                                placeholder='Enter Discount %'
                             />
                         </div>
 
                         <div className="form-group">
-                            <label className="text-muted">Expiry</label>
                             <br />
                             <DatePicker
                                 className="form-control"
@@ -102,22 +107,21 @@ const CreateCouponPage = () => {
                                 selected={expiry}
                                 onChange={(date) => setExpiry(date)}
                                 required
+                                placeholderText="Select Expiry"
                             />
                         </div>
 
-                        <button className="btn btn-outline-primary">Save</button>
+                        <button className="text-center btn btn-primary btn-raised">Save</button>
                     </form>
 
                     <br />
-
-                    <h4>{coupons.length} Coupons</h4>
 
                     <table className="table table-bordered">
                         <thead className="thead-light">
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">Expiry</th>
                                 <th scope="col">Discount</th>
+                                <th scope="col">Expiry</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -126,8 +130,8 @@ const CreateCouponPage = () => {
                             {coupons.map((c) => (
                                 <tr key={c._id}>
                                     <td>{c.name}</td>
-                                    <td>{new Date(c.expiry).toLocaleDateString()}</td>
                                     <td>{c.discount}%</td>
+                                    <td>{new Date(c.expiry).toLocaleDateString()}</td>
                                     <td>
                                         <DeleteOutlined
                                             onClick={() => handleRemove(c._id)}

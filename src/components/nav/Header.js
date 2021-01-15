@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Badge } from "antd";
 import {
     AppstoreOutlined,
@@ -17,15 +17,25 @@ import Search from '../forms/Search'
 const { SubMenu, Item } = Menu;
 
 const Header = () => {
-    const [current, setCurrent] = useState("home");
+    let history = useHistory()
+    const currentPath = history.location.pathname
+    const [current, setCurrent] = useState(currentPath);
+
     let dispatch = useDispatch()
     let { user, cart } = useSelector((state) => ({ ...state }))
-    let history = useHistory()
+   
 
     const handleClick = (e) => {
-        // console.log(e.key);
+         console.log('Menu -', e.key);
         setCurrent(e.key);
     };
+
+        
+    useEffect(() => {
+        setCurrent(history.location.pathname)
+    }, [])
+
+      console.log('location ', history.location.pathname)
 
     const logout = () => {
         firebase.auth().signOut()
@@ -37,16 +47,16 @@ const Header = () => {
     }
 
     return (
-        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-            <Item key="home" icon={<AppstoreOutlined />}>
+        <Menu onClick={handleClick} selectedKeys={[currentPath]} mode="horizontal">
+            <Item key="/" icon={<AppstoreOutlined />}>
                 <Link to="/">Home</Link>
             </Item>
 
-            <Item key="shop" icon={<ShoppingOutlined />}>
+            <Item key="/shop" icon={<ShoppingOutlined />}>
                 <Link to="/shop">Shop</Link>
             </Item>
 
-            <Item key="cart" icon={<ShoppingCartOutlined />}>
+            <Item key="/cart" icon={<ShoppingCartOutlined />}>
                 <Link to="/cart">
                     <Badge count={cart.length} offset={[9, 0]}>
                         Cart

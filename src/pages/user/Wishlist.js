@@ -25,14 +25,15 @@ const Wishlist = () => {
 
     return (
 
-        <div className='container-fluid'>
-            <div className='row col-md-8'>
-                <div className='col-md-4'>
+        <div className='container-fluid pt-3'>
+            <div className='row '>
+                <div className='col-md-2'>
                     <UserNav />
                 </div>
-                <div className='col'>
+                <div className='col-md-8 pt-2'>
                     <h4>Wishlist</h4>
-                    {!wishlist.length && <p>No products in wishlist. <Link to="/shop">Continue Shopping</Link></p>}
+                    <br/>
+                    {!wishlist.length && <p>No Products in Wishlist. <Link to="/shop">Continue Shopping</Link></p>}
                     {wishlist.map(p => <div key={p._id} className='alert alert-secondary'>
                         <Link to={`/product/${p.slug}`}>{p.title}</Link>
                         <span onClick={() => handleRemove(p._id)} className='btn btn-sm float-right'><DeleteOutlined /></span>

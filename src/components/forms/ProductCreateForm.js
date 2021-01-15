@@ -30,8 +30,9 @@ const ProductCreateForm = ({
     } = values;
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Title</label>
                 <input
                     type="text"
@@ -42,7 +43,7 @@ const ProductCreateForm = ({
                 />
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Description</label>
                 <input
                     type="text"
@@ -53,7 +54,7 @@ const ProductCreateForm = ({
                 />
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Price</label>
                 <input
                     type="number"
@@ -64,7 +65,7 @@ const ProductCreateForm = ({
                 />
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Shipping</label>
                 <select
                     name="shipping"
@@ -77,7 +78,7 @@ const ProductCreateForm = ({
                 </select>
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Quantity</label>
                 <input
                     type="number"
@@ -88,7 +89,7 @@ const ProductCreateForm = ({
                 />
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Color</label>
                 <select name="color" className="form-control" onChange={handleChange}>
                     <option>Please select</option>
@@ -100,7 +101,7 @@ const ProductCreateForm = ({
                 </select>
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Brand</label>
                 <select name="brand" className="form-control" onChange={handleChange}>
                     <option>Please select</option>
@@ -112,7 +113,7 @@ const ProductCreateForm = ({
                 </select>
             </div>
 
-            <div className="form-group">
+            <div className="form-group pb-4">
                 <label>Category</label>
                 <select
                     name="category"
@@ -148,10 +149,11 @@ const ProductCreateForm = ({
                     </Select>
                 </div>
             )}
-
-            <br />
-            <button className="btn btn-outline-info">Save</button>
+            <button className="btn btn-primary btn-raised mt-3">Save</button>
         </form>
+         <br/>
+         <br/>
+         </>
     );
 };
 

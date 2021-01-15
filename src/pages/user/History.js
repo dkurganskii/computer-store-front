@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ShowPaymentInfo from "../../components/cards/ShowPaymentInfo";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from "../../components/order/Invoice";
+import { Link } from 'react-router-dom'
 
 const History = () => {
     const [orders, setOrders] = useState([]);
@@ -23,6 +24,8 @@ const History = () => {
         });
 
     const showOrderInTable = (order) => (
+        <>
+        <div className="table-responsive">
         <table className="table table-bordered">
             <thead className="thead-light">
                 <tr>
@@ -41,7 +44,7 @@ const History = () => {
                         <td>
                             <b>{p.product.title}</b>
                         </td>
-                        <td>{p.product.price}</td>
+                        <td>${(p.product.price).toFixed(2)}</td>
                         <td>{p.product.brand}</td>
                         <td>{p.color}</td>
                         <td>{p.count}</td>
@@ -56,6 +59,8 @@ const History = () => {
                 ))}
             </tbody>
         </table>
+        </div>
+        </>
     );
 
     const showDownloadLink = (order) => (
@@ -70,7 +75,7 @@ const History = () => {
 
     const showEachOrders = () =>
         orders.reverse().map((order, i) => (
-            <div key={i} className="m-5 p-3 card">
+            <div key={i} className="p-3 card">
                 <ShowPaymentInfo order={order} />
                 {showOrderInTable(order)}
                 <div className="row">
@@ -80,15 +85,17 @@ const History = () => {
         ));
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid pt-3">
             <div className="row">
                 <div className="col-md-2">
                     <UserNav />
                 </div>
-                <div className="col text-center">
+                <div className="col-md-8">
                     <h4>
-                        {orders.length > 0 ? "User purchase orders" : "No purchase orders"}
+                        My Orders
                     </h4>
+                    <br/>
+                    {!orders.length && <p>No Orders. <Link to="/shop">Continue Shopping</Link></p>}
                     {showEachOrders()}
                 </div>
             </div>
