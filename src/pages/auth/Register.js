@@ -34,7 +34,7 @@ const Register = ({ history }) => {
     const registerForm = () => <form onSubmit={handleSubmit}>
         <input type='email' className='form-control' value={email} onChange={e => setEmail(e.target.value)} placeholder='Your email' autoFocus />
         <br />
-        <button type='submit' className='btn btn-raised'>Register</button>
+        <button type='submit' className='text-center btn btn-primary btn-raised'>Register</button>
     </form>
 
     return (
@@ -42,6 +42,7 @@ const Register = ({ history }) => {
             <div className='row'>
                 <div className='col-md-6 offset-md-3'>
                     <h4>Register</h4>
+                    <br/>
                     {registerForm()}
                 </div>
             </div>

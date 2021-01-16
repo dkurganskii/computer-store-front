@@ -23,7 +23,7 @@ const RegisterComplete = ({ history }) => {
         e.preventDefault()
         // validation
         if (!email || !password) {
-            toast.error('Email and password is required')
+            toast.error('Email and password are required')
             return;
         }
         if (password.length < 6) {
@@ -83,7 +83,7 @@ const RegisterComplete = ({ history }) => {
         <input type='email' className='form-control' value={email} disabled />
         <input type='password' className='form-control' value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' autoFocus />
         <br />
-        <button type='submit' className='btn btn-raised'>Complete Registration</button>
+        <button type='submit' className='text-center btn btn-primary btn-raised'>Complete Registration</button>
     </form>
 
     return (
