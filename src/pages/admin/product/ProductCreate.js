@@ -35,6 +35,7 @@ const ProductCreate = () => {
 
     useEffect(() => {
         loadCategories();
+        // eslint-disable-next-line
     }, []);
 
     const loadCategories = () =>
@@ -44,7 +45,7 @@ const ProductCreate = () => {
         e.preventDefault();
         createProduct(values, user.token)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 window.alert(`"${res.data.title}" is created`);
                 window.location.reload();
             })
@@ -62,10 +63,10 @@ const ProductCreate = () => {
 
     const handleCategoryChange = (e) => {
         e.preventDefault();
-        console.log("CLICKED CATEGORY", e.target.value);
+        // console.log("CLICKED CATEGORY", e.target.value);
         setValues({ ...values, subs: [], category: e.target.value });
         getCategorySubs(e.target.value).then((res) => {
-            console.log("SUB OPTIONS ON CATGORY CLICK", res);
+            // console.log("SUB OPTIONS ON CATGORY CLICK", res);
             setSubOptions(res.data);
         });
         setShowSub(true);

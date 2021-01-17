@@ -50,11 +50,11 @@ const RegisterComplete = ({ history }) => {
                     })
                 const idTokenResult = await user.getIdTokenResult()
                 // redux store
-                console.log('user: ', user, 'idTokenResult: ', idTokenResult)
+                // console.log('user: ', user, 'idTokenResult: ', idTokenResult)
 
                 createOrUpdateUser(idTokenResult.token)
                     .then(res => {
-                        console.log('RES', res)
+                        // console.log('RES', res)
                         dispatch({
                             type: 'LOGGED_IN_USER',
                             payload: {

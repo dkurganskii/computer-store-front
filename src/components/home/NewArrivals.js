@@ -12,6 +12,7 @@ const NewArrivals = () => {
 
     useEffect(() => {
         loadAllProducts();
+        // eslint-disable-next-line
     }, [page]);
 
     useEffect(() => {

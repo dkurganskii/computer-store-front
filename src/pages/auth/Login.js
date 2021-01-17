@@ -34,9 +34,9 @@ const Login = ({ history }) => {
             history.push(intended.from)
         } else {
             if (res.data.role === 'admin') {
-                history.push('/shop')
+                history.push('/')
             } else {
-                history.push('/shop')
+                history.push('/')
             }
         }
 
@@ -53,7 +53,7 @@ const Login = ({ history }) => {
             const idTokenResult = await user.getIdTokenResult()
             createOrUpdateUser(idTokenResult.token)
                 .then(res => {
-                    console.log('RES', res)
+                    // console.log('RES', res)
                     dispatch({
                         type: 'LOGGED_IN_USER',
                         payload: {
@@ -84,7 +84,7 @@ const Login = ({ history }) => {
                 const idTokenResult = await user.getIdTokenResult()
                 createOrUpdateUser(idTokenResult.token)
                     .then(res => {
-                        console.log('RES', res)
+                        // console.log('RES', res)
                         dispatch({
                             type: 'LOGGED_IN_USER',
                             payload: {

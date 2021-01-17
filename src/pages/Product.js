@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { getProduct, productStar } from '../functions/product'
 import SingleProduct from '../components/cards/SingleProduct'
 import { useSelector } from 'react-redux'
-import { showAverage } from '../functions/rating'
 import { getRelated } from '../functions/product'
 import ProductCard from '../components/cards/ProductCard'
 
@@ -17,6 +16,7 @@ const Product = ({ match }) => {
 
     useEffect(() => {
         loadSingleProduct()
+        // eslint-disable-next-line
     }, [slug])
 
     useEffect(() => {
@@ -25,7 +25,8 @@ const Product = ({ match }) => {
                 (ele) => (ele.postedBy.toString() === user._id.toString()))
             existingRatingObject && setStar(existingRatingObject.star) // current user's star
         }
-    })
+        // eslint-disable-next-line
+    }, [])
 
     const loadSingleProduct = () => {
         getProduct(slug).then(res => {
@@ -40,7 +41,7 @@ const Product = ({ match }) => {
         // console.table(newRating, name)
         productStar(name, newRating, user.token)
             .then(res => {
-                console.log('rating clicked', res.data)
+                // console.log('rating clicked', res.data)
                 loadSingleProduct() // if you want to leave rating in real time
             })
     }

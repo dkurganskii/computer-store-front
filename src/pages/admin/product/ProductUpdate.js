@@ -39,6 +39,7 @@ const ProductUpdate = ({ match, history }) => {
     useEffect(() => {
         loadProduct();
         loadCategories();
+        // eslint-disable-next-line
     }, []);
 
     const loadProduct = () => {
@@ -52,17 +53,17 @@ const ProductUpdate = ({ match, history }) => {
             });
             // 3 prepare array of sub ids to show as default sub values in antd Select
             let arr = [];
-            p.data.subs.map((s) => {
+            p.data.subs.forEach((s) => {
                 arr.push(s._id);
             });
-            console.log("ARR", arr);
+            // console.log("ARR", arr);
             setArrayOfSubs((prev) => arr); // required for ant design select to work
         });
     };
 
     const loadCategories = () =>
         getCategories().then((c) => {
-            console.log("GET CATEGORIES IN UPDATE PRODUCT", c.data);
+            // console.log("GET CATEGORIES IN UPDATE PRODUCT", c.data);
             setCategories(c.data);
         });
 
@@ -93,17 +94,17 @@ const ProductUpdate = ({ match, history }) => {
 
     const handleCategoryChange = (e) => {
         e.preventDefault();
-        console.log("CLICKED CATEGORY", e.target.value);
+        // console.log("CLICKED CATEGORY", e.target.value);
         setValues({ ...values, subs: [] });
 
         setSelectedCategory(e.target.value);
 
         getCategorySubs(e.target.value).then((res) => {
-            console.log("SUB OPTIONS ON CATGORY CLICK", res);
+            // console.log("SUB OPTIONS ON CATGORY CLICK", res);
             setSubOptions(res.data);
         });
 
-        console.log("EXISTING CATEGORY values.category", values.category);
+        // console.log("EXISTING CATEGORY values.category", values.category);
 
         // if user clicks back to the original category
         // show its sub categories in default

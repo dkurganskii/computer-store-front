@@ -10,9 +10,10 @@ const CategoryList = () => {
         setLoading(true)
         getCategories().then(c => {
             setCategories(c.data)
-            console.log('categories', categories)
+            // console.log('categories', categories)
             setLoading(false)
         })
+        // eslint-disable-next-line
     }, [])
 
     const showCategories = () => categories.map((c) =>

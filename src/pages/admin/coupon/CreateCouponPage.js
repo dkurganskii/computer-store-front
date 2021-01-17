@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import {
@@ -103,7 +103,6 @@ const CreateCouponPage = () => {
                             <br />
                             <DatePicker
                                 className="form-control"
-                                selected={new Date()}
                                 selected={expiry}
                                 onChange={(date) => setExpiry(date)}
                                 required

@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 import Star from "../components/forms/Star";
 
-const { SubMenu, ItemGroup } = Menu;
+const { SubMenu } = Menu;
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -24,9 +24,12 @@ const Shop = () => {
     const [ok, setOk] = useState(false);
     const [categories, setCategories] = useState([]);
     const [categoryIds, setCategoryIds] = useState([]);
+    // eslint-disable-next-line
     const [star, setStar] = useState("");
     const [subs, setSubs] = useState([]);
+    // eslint-disable-next-line
     const [sub, setSub] = useState("");
+    // eslint-disable-next-line
     const [brands, setBrands] = useState([
         "Apple",
         "Samsung",
@@ -38,6 +41,7 @@ const Shop = () => {
         "MSI"
     ]);
     const [brand, setBrand] = useState("");
+    // eslint-disable-next-line
     const [colors, setColors] = useState([
         "Black",
         "Brown",
@@ -87,8 +91,9 @@ const Shop = () => {
 
     // 3. load products based on price range
     useEffect(() => {
-        console.log("ok to request");
+        // console.log("ok to request");
         fetchProducts({ price });
+        // eslint-disable-next-line
     }, [ok]);
 
     const handleSlider = (value) => {

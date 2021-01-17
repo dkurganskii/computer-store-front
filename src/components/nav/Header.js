@@ -10,7 +10,7 @@ import {
     ShoppingCartOutlined
 } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
-import firebase from 'firebase'
+import firebase from 'firebase/app';
 import { useDispatch, useSelector } from 'react-redux'
 import Search from '../forms/Search'
 
@@ -19,6 +19,7 @@ const { SubMenu, Item } = Menu;
 const Header = () => {
     let history = useHistory()
     const currentPath = history.location.pathname
+    // eslint-disable-next-line
     const [current, setCurrent] = useState(currentPath);
 
     let dispatch = useDispatch()
@@ -26,16 +27,17 @@ const Header = () => {
    
 
     const handleClick = (e) => {
-         console.log('Menu -', e.key);
+        //  console.log('Menu -', e.key);
         setCurrent(e.key);
     };
 
         
     useEffect(() => {
         setCurrent(history.location.pathname)
+        // eslint-disable-next-line
     }, [])
 
-      console.log('location ', history.location.pathname)
+    //   console.log('location ', history.location.pathname)
 
     const logout = () => {
         firebase.auth().signOut()

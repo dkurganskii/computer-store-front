@@ -23,10 +23,11 @@ const Checkout = ({ history }) => {
 
     useEffect(() => {
         getUserCart(user.token).then((res) => {
-            console.log("user cart res", JSON.stringify(res.data, null, 4));
+            // console.log("user cart res", JSON.stringify(res.data, null, 4));
             setProducts(res.data.products);
             setTotal(res.data.cartTotal);
         });
+        // eslint-disable-next-line
     }, []);
 
     const emptyCart = () => {
@@ -66,13 +67,13 @@ const Checkout = ({ history }) => {
     };
 
     const applyDiscountCoupon = () => {
-        console.log('send coupon to backend', coupon)
+        // console.log('send coupon to backend', coupon)
         if(coupon.trim().length < 2){
             alert('Enter correct coupon')
         }else{
             applyCoupon(user.token, coupon)
             .then(res => {
-                console.log('RES ON COUPON APPLIED', res.data)
+                // console.log('RES ON COUPON APPLIED', res.data)
                 if (res.data) {
                     setTotalAfterDiscount(res.data)
                     dispatch({
@@ -103,7 +104,7 @@ const Checkout = ({ history }) => {
                 onChange={e => { setAddress(e.target.value) }}
             />
             <Button type="primary" className="text-center btn btn-primary btn-raised mt-4" onClick={saveAddressToDb}>
-                Save
+                Save Address
         </Button>
             <br />
         </>
@@ -122,7 +123,7 @@ const Checkout = ({ history }) => {
             ))}
         </>
     )
-
+// eslint-disable-next-line
     {
         products.map((p, i) => (
             <div key={i}>
@@ -145,13 +146,13 @@ const Checkout = ({ history }) => {
                 type='text'
                 placeholder='Enter coupon'
             />
-            <Button onClick={applyDiscountCoupon} className='text-center btn btn-primary btn-raised mt-4'>Apply</Button>
+            <Button onClick={applyDiscountCoupon} className='text-center btn btn-primary btn-raised mt-4'>Apply Coupon</Button>
         </>
     )
 
     const createCashOrder = () => {
         createCashOrderForUser(user.token, COD, couponTrueOrFalse).then((res) => {
-            console.log("USER CASH ORDER CREATED RES ", res);
+            // console.log("USER CASH ORDER CREATED RES ", res);
             // empty cart form redux, local Storage, reset coupon, reset COD, redirect
             if (res.data.ok) {
                 // empty local storage

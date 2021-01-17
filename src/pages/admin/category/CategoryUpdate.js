@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AdminNav from '../../../components/nav/AdminNav'
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
-import { createCategory, getCategory, updateCategory } from '../../../functions/category'
+import { getCategory, updateCategory } from '../../../functions/category'
 import CategoryForm from '../../../components/forms/CategoryForm'
 
 
@@ -14,6 +14,7 @@ const CategoryUpdate = ({ history, match }) => {
 
     useEffect(() => {
         loadCategory()
+        // eslint-disable-next-line
     }, [])
 
     const loadCategory = () =>

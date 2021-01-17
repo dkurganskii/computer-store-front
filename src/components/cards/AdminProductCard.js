@@ -13,7 +13,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
     return (
         <Card
             cover={
-                <img
+                <img alt='laptop'
                     src={images && images.length ? images[0].url : laptop}
                     style={{ height: "150px", objectFit: "cover" }}
                     className="p-1"

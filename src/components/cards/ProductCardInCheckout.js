@@ -15,7 +15,7 @@ const ProductCardInCheckout = ({ p }) => {
     let dispatch = useDispatch();
 
     const handleColorChange = (e) => {
-        console.log("color changed", e.target.value);
+        // console.log("color changed", e.target.value);
 
         let cart = [];
         if (typeof window !== "undefined") {
@@ -23,7 +23,13 @@ const ProductCardInCheckout = ({ p }) => {
                 cart = JSON.parse(localStorage.getItem("cart"));
             }
 
-            cart.map((product, i) => {
+            // cart.map((product, i) => {
+            //     if (product._id === p._id) {
+            //         cart[i].color = e.target.value;
+            //     }
+            // });
+
+            cart.forEach((product, i) => {
                 if (product._id === p._id) {
                     cart[i].color = e.target.value;
                 }
@@ -54,8 +60,8 @@ const ProductCardInCheckout = ({ p }) => {
                 cart = JSON.parse(localStorage.getItem("cart"));
             }
 
-            cart.map((product, i) => {
-                if (product._id == p._id) {
+            cart.forEach((product, i) => {
+                if (product._id === p._id) {
                     cart[i].count = count;
                 }
             });
@@ -77,7 +83,7 @@ const ProductCardInCheckout = ({ p }) => {
                 cart = JSON.parse(localStorage.getItem("cart"));
             }
             // [1,2,3,4,5]
-            cart.map((product, i) => {
+            cart.forEach((product, i) => {
                 if (product._id === p._id) {
                     cart.splice(i, 1);
                 }

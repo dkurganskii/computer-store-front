@@ -10,9 +10,10 @@ const SubList = () => {
         setLoading(true)
         getSubs().then(c => {
             setSubs(c.data)
-            console.log('subs', subs)
+            // console.log('subs', subs)
             setLoading(false)
         })
+        // eslint-disable-next-line
     }, [])
 
     const showSubs = () => subs.map((s) =>

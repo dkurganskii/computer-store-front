@@ -27,12 +27,13 @@ const StripeCheckout = ({ history }) => {
     useEffect(() => {
         createPaymentIntent(user.token, coupon)
             .then(res => {
-                console.log('create payment intent', res.data)
+                // console.log('create payment intent', res.data)
                 setClientSecret(res.data.clientSecret)
                 setCartTotal(res.data.cartTotal)
                 setTotalAfterDiscount(res.data.totalAfterDiscount)
                 setPayable(res.data.payable)
             })
+            // eslint-disable-next-line
     }, [])
 
     const handleSubmit = async (e) => {
@@ -66,7 +67,7 @@ const StripeCheckout = ({ history }) => {
                         emptyUserCart(user.token)
                     }
                 })
-            console.log(JSON.stringify(payload, null, 4))
+            // console.log(JSON.stringify(payload, null, 4))
             setError(null)
             setProcessing(false)
             setSucceeded(true)
@@ -106,7 +107,7 @@ const StripeCheckout = ({ history }) => {
             }
             <div className='text-center pb-5'>
                 <Card
-                    cover={<img src={laptop}
+                    cover={<img alt='laptop' src={laptop}
                         style={{ height: '320px', objectFit: 'cover', marginBottom: '-50px' }} />}
                     actions={[
                         <>

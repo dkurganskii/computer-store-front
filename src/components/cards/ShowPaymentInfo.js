@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../components/nav/AdminNav";
 import { getOrders, changeStatus } from "../../functions/admin";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 
 const ShowPaymentInfo = ({ order, showStatus = true }) =>{ 
-
+// eslint-disable-next-line
   const [orders, setOrders] = useState([]);
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
       loadOrders();
+      // eslint-disable-next-line
   }, []);
 
   const loadOrders = () =>
       getOrders(user.token).then((res) => {
-          console.log(JSON.stringify(res.data, null, 4));
+        //   console.log(JSON.stringify(res.data, null, 4));
           setOrders(res.data);
       });
 

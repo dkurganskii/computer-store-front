@@ -5,14 +5,14 @@ import laptop from "../../images/laptop.png";
 import { Link } from "react-router-dom";
 import { showAverage } from '../../functions/rating'
 import _ from 'lodash'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const { Meta } = Card;
 
 const ProductCard = ({ product }) => {
     const [tooltip, setTooltip] = useState('Click to add')
     // redux
-    const { user, cart } = useSelector((state) => ({ ...state }))
+    // const { user, cart } = useSelector((state) => ({ ...state }))
     const dispatch = useDispatch()
 
     const handleAddToCart = () => {
@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
             {/* <Link to={`/product/${slug}`}> */}
             <Card hoverable style={{ height: '100%' }}
                 cover={
-                    <img src={images && images.length ? images[0].url : laptop}
+                    <img alt='laptop' src={images && images.length ? images[0].url : laptop}
                         className="p-1"
                     />
                 }
@@ -71,7 +71,8 @@ const ProductCard = ({ product }) => {
                         <EyeOutlined className="text-warning" /> <br /> View Product
                 </Link>,
                     <Tooltip title={tooltip}>
-                        <a onClick={handleAddToCart} disabled={product.quantity < 1}>
+                         {/* eslint-disable jsx-a11y/anchor-is-valid  */}
+                        <a  onClick={handleAddToCart} disabled={product.quantity < 1}>
                             <ShoppingCartOutlined className="text-danger" /> <br />
                             {product.quantity > 1 ? 'Add to cart' : 'Out of stock'}
                         </a>

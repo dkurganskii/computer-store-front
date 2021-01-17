@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Card, Tabs, Tooltip } from "antd";
-import { Link } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -22,7 +21,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
     const { images, title, description, _id } = product;
     const [tooltip, setTooltip] = useState('Click to add')
     // redux
-    const { user, cart } = useSelector((state) => ({ ...state }))
+    const { user } = useSelector((state) => ({ ...state }))
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -63,7 +62,7 @@ const SingleProduct = ({ product, onStarClick, star }) => {
     const handleAddToWishlist = (e) => {
         e.preventDefault()
         addToWishlist(product._id, user.token).then(res => {
-            console.log('ADDED TO WISHLIST', res.data)
+            // console.log('ADDED TO WISHLIST', res.data)
             toast.success('Added to wishlist')
             history.push('/user/wishlist')
         })
@@ -74,10 +73,10 @@ const SingleProduct = ({ product, onStarClick, star }) => {
             <div className="col-md-6">
                 {images && images.length ? (
                     <Carousel showArrows={true} autoPlay infiniteLoop>
-                        {images && images.map((i) => <img src={i.url} key={i.public_id} />)}
+                        {images && images.map((i) => <img alt='' src={i.url} key={i.public_id} />)}
                     </Carousel>
                 ) : (
-                        <Card cover={<img src={Laptop} className="mb-3 card-image" />}></Card>
+                        <Card cover={<img alt='' src={Laptop} className="mb-3 card-image" />}></Card>
                     )}
                 <Tabs type='card'>
                     <TabPane tab='Description' key='1'>
@@ -96,10 +95,12 @@ const SingleProduct = ({ product, onStarClick, star }) => {
                 <Card
                     actions={[
                         <Tooltip title={tooltip}>
+                            {/* eslint-disable jsx-a11y/anchor-is-valid  */}
                             <a onClick={handleAddToCart}>
                                 <ShoppingCartOutlined className="text-danger" /> <br /> Add to Cart
                 </a>
                         </Tooltip>,
+                        // eslint-disable-next-line
                         <a onClick={handleAddToWishlist}>
                             <HeartOutlined className="text-info" /> <br /> Add to Wishlist
                      </a>,
