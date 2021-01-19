@@ -55,6 +55,7 @@ const Shop = () => {
     let dispatch = useDispatch();
     let { search } = useSelector((state) => ({ ...state }));
     const { text } = search;
+    const emptySearch = " "
 
     useEffect(() => {
         loadAllProducts();
@@ -81,7 +82,7 @@ const Shop = () => {
     // 2. load products on user search input
     useEffect(() => {
         const delayed = setTimeout(() => {
-            fetchProducts({ query: text });
+            fetchProducts({ query: text || emptySearch });
             if (!text) {
                 loadAllProducts();
             }
@@ -91,7 +92,6 @@ const Shop = () => {
 
     // 3. load products based on price range
     useEffect(() => {
-        // console.log("ok to request");
         fetchProducts({ price });
         // eslint-disable-next-line
     }, [ok]);
@@ -434,9 +434,9 @@ const Shop = () => {
 
                 <div className="col-md-9 pt-2">
                     {loading ? (
-                        <h4 className="text-danger">Loading...</h4>
+                        <h4>Loading...</h4>
                     ) : (
-                            <h4 className="text-danger">Products</h4>
+                            <h4>Products</h4>
                         )}
 
                     {products.length < 1 && <p>No products found</p>}
